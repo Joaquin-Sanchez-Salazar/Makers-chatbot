@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "marca": "Dell",
+    "modelo": "Inspiron 14",
+    "ram": "8 GB",
+    "procesador": "Intel i5",
+    "precio": 2100,
+    "stock": 3
+  },
+  {
+    "id": 2,
+    "marca": "HP",
+    "modelo": "Pavilion 15",
+    "ram": "16 GB",
+    "procesador": "AMD Ryzen 5",
+    "precio": 2500,
+    "stock": 2
+  },
+  {
+    "id": 3,
+    "marca": "Apple",
+    "modelo": "MacBook Air",
+    "ram": "8 GB",
+    "procesador": "M1",
+    "precio": 4300,
+    "stock": 1
+  },
+  {
+    "id": 4,
+    "marca": "HP",
+    "modelo": "Envy",
+    "ram": "8 GB",
+    "procesador": "Intel i7",
+    "precio": 2700,
+    "stock": 2
+  }
+]
