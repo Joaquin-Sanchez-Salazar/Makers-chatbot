@@ -76,7 +76,7 @@ test_cases = [
     ("I need assistance.", "small talk"),
     ("¿Qué sabes hacer?", "small talk"),
 
-    # — nuevas en inglés (13 tests)
+    # — new tests (13 tests)
     ("What's your total computer inventory?", "get total stock"),
     ("Do you stock any Apple laptops?", "get stock by brand"),
     ("Show me your laptop count", "get total stock"),
@@ -105,9 +105,7 @@ def analyze_response(resp: str, expected: str) -> bool:
         return bool(re.match(r'^(we stock|disponemos de):', txt))
 
     if expected == "get stock by brand":
-        # Inglés: marca antes de "computers available"
         eng = re.match(r'^we have\s+\d+\s+.+?\s+computers?\s+available\.?$', txt)
-        # Español: marca antes de "computadoras disponibles"
         esp = re.match(r'^tenemos\s+\d+\s+.+?\s+computadoras?\s+disponibles\.?$', txt)
         return bool(eng or esp)
 
@@ -146,7 +144,7 @@ for i, (msg, expected) in enumerate(test_cases, 1):
     else:
         failures.append((i, msg, resp))
 
-# Guardar fallos
+# Save failures
 with open("test_results.txt", "w", encoding="utf-8") as f:
     for i, msg, resp in failures:
         f.write(f"Test {i}: {msg}\n→ {resp}\n\n")
@@ -165,7 +163,7 @@ metrics = {
     }
 }
 
-# Guardar métricas
+# Save metrics
 with open("metrics.json", "w", encoding="utf-8") as f:
     json.dump(metrics, f, ensure_ascii=False, indent=2)
 with open("metrics.csv", "w", newline='', encoding="utf-8") as f:

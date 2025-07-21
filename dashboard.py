@@ -3,10 +3,10 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import json
 
-# 1) Base dir del script
+# 1) Base dir
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-# 2) Carga de métricas
+# 2) Load metrics
 metrics_path = os.path.join(BASE_DIR, "metrics.csv")
 df_metrics = pd.read_csv(metrics_path)
 
@@ -25,13 +25,12 @@ plt.tight_layout()
 plt.savefig(os.path.join(BASE_DIR, "accuracy_by_intent.png"))
 plt.show()
 
-# 4) Carga del inventario (data.json)
+# 4) Load data.json
 data_path = os.path.join(BASE_DIR, "data.json")
 with open(data_path, "r", encoding="utf-8") as f:
     data = json.load(f)
 df_data = pd.DataFrame(data)
 
-# Comprueba columnas disponibles
 print("\nColumns in data.json:", df_data.columns.tolist())
 
 # 5) Stock by Brand

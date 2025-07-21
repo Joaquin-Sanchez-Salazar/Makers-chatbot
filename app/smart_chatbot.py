@@ -3,14 +3,13 @@ from langdetect import detect
 from fuzzywuzzy import fuzz
 from sentence_transformers import SentenceTransformer, util
 
-# Carga del modelo de embeddings
+# Load model
 embedder = SentenceTransformer("all-MiniLM-L6-v2")
 
-# Carga de datos
+# Load data
 with open("data.json", "r", encoding="utf-8") as f:
     data = json.load(f)
 
-# Ejemplos por intención
 intents_examples = {
     "get total stock": [
         "how many computers do you have",
@@ -62,7 +61,6 @@ intents_examples = {
     ]
 }
 
-# Traducciones con plantillas
 translations = {
     "en": {
         "stock_by_brand": "We have {stock} {entity} {noun} available.",
@@ -86,7 +84,6 @@ translations = {
     }
 }
 
-# Alias de nombres y marcas
 name_aliases = {
     "dell inspiron": "Dell Inspiron 14",
     "hp pavilion": "HP Pavilion 15",
@@ -104,11 +101,10 @@ brand_aliases = {
     "mac": "Apple", "dell": "Dell", "pavilion": "HP"
 }
 
-# Small talk y keywords
 SMALLTALK = intents_examples["small talk"]
 BRAND_KEYWORDS = ["brand", "brands", "marca", "marcas"]
 
-# Preparamos flat list y embeddings de ejemplos
+# flat list and embeddings
 flat = [(intent, ex) for intent, exs in intents_examples.items() for ex in exs]
 texts = [ex for _, ex in flat]
 embs = embedder.encode(texts, convert_to_tensor=True)
@@ -159,10 +155,9 @@ def classify_intent(message, threshold=0.60):
 
 def generate_response(message):
     lang = get_language(message)
-    t = translations.get(lang, translations["en"])  # <-- aquí el fallback
+    t = translations.get(lang, translations["en"]) 
     msg = message.lower()
 
-    # Saludo directo
     if msg in ["hi", "hello", "hola", "buenos días", "buenas"]:
         return t["welcome"]
 
