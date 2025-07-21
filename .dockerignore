@@ -1,0 +1,23 @@
+# Virtualenvs / caches de Python
+venv/
+__pycache__/
+*.pyc
+
+# Entorno y credenciales
+.env
+
+# Git y metadatos
+.git
+.gitignore
+
+# Archivos estáticos de Node / editor
+node_modules/
+.vscode/
+.DS_Store
+
+# Tests y métricas
+test_chatbot.py
+test_results.txt
+metrics.json
+metrics.csv
+dashboard.py
