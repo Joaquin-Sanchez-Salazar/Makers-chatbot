@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Makers Tech ChatBot</title>
+  <style>
+    :root {
+      --primary-color: #4a90e2;
+      --secondary-color: #f5f7fa;
+      --user-bubble: #d1e7dd;
+      --bot-bubble: #e2e3e5;
+      --font: 'Segoe UI', Roboto, sans-serif;
+    }
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      background: var(--secondary-color);
+      font-family: var(--font);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    #chat-container {
+      width: 100%;
+      max-width: 600px;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    header {
+      background: var(--primary-color);
+      color: white;
+      padding: 16px;
+      font-size: 1.25rem;
+      text-align: center;
+    }
+    #chat {
+      flex: 1;
+      padding: 16px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .user, .bot {
+      max-width: 70%;
+      padding: 12px 16px;
+      border-radius: 20px;
+      line-height: 1.4;
+      word-wrap: break-word;
+      position: relative;
+    }
+    .user {
+      background: var(--user-bubble);
+      align-self: flex-end;
+      border-bottom-right-radius: 4px;
+    }
+    .bot {
+      background: var(--bot-bubble);
+      align-self: flex-start;
+      border-bottom-left-radius: 4px;
+    }
+    footer {
+      display: flex;
+      border-top: 1px solid #ddd;
+    }
+    #messageInput {
+      flex: 1;
+      border: none;
+      padding: 14px;
+      font-size: 1rem;
+    }
+    #messageInput:focus {
+      outline: none;
+    }
+    #sendBtn {
+      background: var(--primary-color);
+      border: none;
+      color: white;
+      padding: 0 20px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    #sendBtn:hover {
+      background: #357abd;
+    }
+    /* Scrollbar styling */
+    #chat::-webkit-scrollbar {
+      width: 6px;
+    }
+    #chat::-webkit-scrollbar-thumb {
+      background: rgba(0,0,0,0.2);
+      border-radius: 3px;
+    }
+  </style>
+</head>
+<body>
+  <div id="chat-container">
+    <header>🤖 Makers Tech ChatBot</header>
+    <div id="chat"></div>
+    <footer>
+      <input
+        type="text"
+        id="messageInput"
+        placeholder="Escribe tu pregunta..."
+        autocomplete="off"
+      />
+      <button id="sendBtn">Enviar</button>
+    </footer>
+  </div>
+
+  <script>
+    const chat = document.getElementById("chat");
+    const input = document.getElementById("messageInput");
+    const sendBtn = document.getElementById("sendBtn");
+
+    // Mostrar mensaje de bienvenida
+    window.addEventListener("load", () => {
+      const lang = navigator.language || navigator.userLanguage;
+      const welcome = document.createElement("div");
+      welcome.className = "bot";
+      welcome.textContent = lang.startsWith("en")
+        ? "Hi! I'm the Makers Tech assistant. You can ask me about our available computers 😊"
+        : "¡Hola! Soy el asistente de Makers Tech. Puedes preguntarme por nuestras computadoras disponibles 😊";
+      chat.appendChild(welcome);
+      chat.scrollTop = chat.scrollHeight;
+    });
+
+    // Enviar mensaje al pulsar botón o Enter
+    sendBtn.addEventListener("click", sendMessage);
+    input.addEventListener("keydown", e => {
+      if (e.key === "Enter" && !e.shiftKey) {
+        e.preventDefault();
+        sendMessage();
+      }
+    });
+
+    async function sendMessage() {
+      const message = input.value.trim();
+      if (!message) return;
+
+      // Mostrar burbuja del usuario
+      const userDiv = document.createElement("div");
+      userDiv.className = "user";
+      userDiv.textContent = message;
+      chat.appendChild(userDiv);
+      scrollToBottom();
+
+      input.value = "";
+      input.disabled = true;
+      sendBtn.disabled = true;
+
+      try {
+        const res = await fetch("/chat", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ message })
+        });
+        const data = await res.json();
+
+        // Mostrar burbuja del bot
+        const botDiv = document.createElement("div");
+        botDiv.className = "bot";
+        botDiv.textContent = data.response || "Oops, algo salió mal.";
+        chat.appendChild(botDiv);
+      } catch (err) {
+        const errDiv = document.createElement("div");
+        errDiv.className = "bot";
+        errDiv.textContent = "Error de conexión. Inténtalo de nuevo.";
+        chat.appendChild(errDiv);
+      } finally {
+        input.disabled = false;
+        sendBtn.disabled = false;
+        input.focus();
+        scrollToBottom();
+      }
+    }
+
+    function scrollToBottom() {
+      chat.scrollTop = chat.scrollHeight;
+    }
+  </script>
+</body>
+</html>

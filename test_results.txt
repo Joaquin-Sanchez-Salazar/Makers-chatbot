@@ -1,0 +1,36 @@
+Test 18: ¿Stock de Apple laptops?
+→ We have 8 computers in stock.
+
+Test 20: Which brands do you sell?
+→ Welcome! Ask me anything about the available computers.
+
+Test 35: ¿Qué RAM y CPU tiene la Envy?
+→ Tenemos 8 computadoras en stock.
+
+Test 43: How much is the HP Pavilion 15?
+→ HP Pavilion 15 - RAM: 16 GB - Processor: AMD Ryzen 5 - Price: 2500 - Stock: 2
+
+Test 44: ¿Precio de la Dell Inspiron 14?
+→ Dell Inspiron 14 - RAM: 8 GB - Processor: Intel i5 - Price: 2100 - Stock: 3
+
+Test 46: ¿Cuál es el precio de Envy?
+→ Lo siento, no entendí tu solicitud.
+
+Test 55: Tell me a joke.
+→ Sorry, I didn't understand your request.
+
+Test 56: How are you?
+→ Sorry, I didn't understand your request.
+
+Test 58: I need assistance.
+→ Sorry, I didn't understand your request.
+
+Test 59: ¿Qué sabes hacer?
+→ Sorry, I didn't understand your request.
+
+Test 61: Do you stock any Apple laptops?
+→ Sorry, I didn't understand your request.
+
+Test 65: Give me info on Apple laptops
+→ Apple MacBook Air - RAM: 8 GB - Processor: M1 - Price: 4300 - Stock: 1
+

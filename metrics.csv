@@ -1,0 +1,7 @@
+intent,correct,total,accuracy
+get total stock,13,13,100.0
+get stock by brand,10,13,76.92
+list brands,6,7,85.71
+get computer specifications,13,14,92.86
+get price of a computer,10,13,76.92
+small talk,8,12,66.67

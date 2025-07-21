@@ -1,0 +1,35 @@
+{
+  "overall_accuracy": 83.33,
+  "by_intent": {
+    "get total stock": {
+      "accuracy": 100.0,
+      "correct": 13,
+      "total": 13
+    },
+    "get stock by brand": {
+      "accuracy": 76.92,
+      "correct": 10,
+      "total": 13
+    },
+    "list brands": {
+      "accuracy": 85.71,
+      "correct": 6,
+      "total": 7
+    },
+    "get computer specifications": {
+      "accuracy": 92.86,
+      "correct": 13,
+      "total": 14
+    },
+    "get price of a computer": {
+      "accuracy": 76.92,
+      "correct": 10,
+      "total": 13
+    },
+    "small talk": {
+      "accuracy": 66.67,
+      "correct": 8,
+      "total": 12
+    }
+  }
+}
